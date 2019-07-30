@@ -55,13 +55,33 @@ class Users extends React.Component<Props, State> {
       {
         title: 'Name',
         dataIndex: 'name',
-        width: 140
       },
       {
-        title: 'Games Played',
+        title: 'Played',
         dataIndex: 'gamesPlayed'
       },
+      {
+        title: 'Won',
+        dataIndex: 'gamesWon'
+      },
+      {
+        title: 'Win %',
+        dataIndex: 'winPercentage'
+      },
+      {
+        title: 'Total Points',
+        dataIndex: 'totalPoints'
+      },
+      {
+        title: 'PPG',
+        dataIndex: 'pointsPerGame'
+      },
+      {
+        title: 'Rank',
+        dataIndex: 'rank'
+      },
     ];
+
     return (
       <View style={styles.container}>
         <Text>Users</Text>
