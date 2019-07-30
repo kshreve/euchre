@@ -3,6 +3,7 @@ import { Button, Text, View } from 'react-native';
 
 import { Navigation } from '../types/navigation';
 import styles from '../styles';
+import Users from './Users';
 
 interface Props {
   navigation: Navigation,
@@ -16,14 +17,17 @@ class Home extends React.Component<Props> {
   recordNew = () => {
     const { navigate } = this.props.navigation;
 
-    return navigate('Profile', { name: 'Jane' })
+    return navigate('Record')
   }
 
   render() {
+    const { navigation } = this.props;
+
     return (
       <View style={styles.container}>
         <Text>Dashboard</Text>
         <Button title="Record New" color="#841584" onPress={this.recordNew} />
+        <Users navigation={navigation} />
       </View>
     );
   }
