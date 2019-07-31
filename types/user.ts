@@ -6,5 +6,5 @@ export interface User {
   winPercent: number,
   totalPoints: number,
   pointsPerGame: number,
-  lastDatePlayed: Date,
+  lastDatePlayed?: Date,
 }

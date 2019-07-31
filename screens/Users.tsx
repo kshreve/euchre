@@ -24,10 +24,6 @@ class Users extends React.Component<Props, State> {
   }
 
   async componentDidMount(): Promise<void> {
-    await AsyncStorage.setItem('Users', JSON.stringify([
-      { name: 'kevin', gamesPlayed: 1 },
-      { name: 'shelby', gamesPlayed: 2 }
-    ]));
     let users = await this.getUsers();
 
     this.setState({
@@ -44,9 +40,10 @@ class Users extends React.Component<Props, State> {
   };
 
   createNew = () => {
-    const { navigate } = this.props.navigation;
+    const { navigation: { navigate } } = this.props;
+    const { users } = this.state;
 
-    return navigate('User');
+    return navigate('User', { users });
   }
 
   render() {
