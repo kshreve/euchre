@@ -26,7 +26,7 @@ class Home extends React.Component<Props> {
     return (
       <View style={styles.container}>
         <Text>Dashboard</Text>
-        <Button title="Record New" color="#841584" onPress={this.recordNew} />
+        <Button title="Record New Game" color="#841584" onPress={this.recordNew} />
         <Users navigation={navigation} />
       </View>
     );

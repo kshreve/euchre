@@ -10,7 +10,7 @@ interface Props {
 
 class Record extends React.Component<Props> {
   static navigationOptions = {
-    title: 'Record New',
+    title: 'Record New Game',
   };
 
   render() {
