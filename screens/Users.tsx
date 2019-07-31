@@ -63,7 +63,7 @@ class Users extends React.Component<Props, State> {
       },
       {
         title: 'Win %',
-        dataIndex: 'winPercentage'
+        dataIndex: 'winPercent'
       },
       {
         title: 'Total Points',
