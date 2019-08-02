@@ -1,10 +1,10 @@
-import React from 'react';
-import { AsyncStorage, Button, Text, TextInput, View } from 'react-native';
+import React from "react";
+import { AsyncStorage, Button, Text, TextInput, View } from "react-native";
 
-import { Navigation } from '../types/navigation';
-import styles from '../styles';
-import { User } from '../types/user';
-import { createNewUser } from '../utils/userCalculator';
+import { Navigation } from "../types/navigation";
+import styles from "../styles";
+import { User } from "../types/user";
+import { createNewUser } from "../utils/userCalculator";
 
 interface Props {
   navigation: Navigation,
@@ -17,16 +17,16 @@ interface State {
 
 class Users extends React.Component<Props, State> {
   static navigationOptions = {
-    title: 'Create New User',
+    title: "Create New User"
   };
 
   state = {
     name: null
-  }
+  };
 
   createNew = async () => {
-    const { navigation: { navigate, getParam }, } = this.props;
-    const users = getParam('users') || [];
+    const { navigation: { navigate, getParam } } = this.props;
+    const users = getParam("users") || [];
     const { name } = this.state;
 
     let id = 1;
@@ -39,19 +39,19 @@ class Users extends React.Component<Props, State> {
       });
     }
 
-    const newUser = createNewUser({ id, name })
+    const newUser = createNewUser({ id, name });
 
-    await AsyncStorage.setItem('Users', JSON.stringify([...users, newUser]));
+    await AsyncStorage.setItem("Users", JSON.stringify([...users, newUser]));
 
-    return navigate('Users');
-  }
+    return navigate("Users");
+  };
 
   render() {
     return (
       <View style={styles.container}>
         <Text>Create New User</Text>
         <TextInput
-          style={{ height: 40, width: '100%', borderColor: 'gray', borderWidth: 1 }}
+          style={{ height: 40, width: "100%", borderColor: "gray", borderWidth: 1 }}
           onChangeText={(text) => this.setState({ name: text })}
           value={this.state.name}
         />

@@ -1,8 +1,8 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import React from "react";
+import { Text, View } from "react-native";
 
-import { Navigation } from '../types/navigation';
-import styles from '../styles';
+import { Navigation } from "../types/navigation";
+import styles from "../styles";
 
 interface Props {
   navigation: Navigation,
@@ -10,12 +10,12 @@ interface Props {
 
 class Record extends React.Component<Props> {
   static navigationOptions = {
-    title: 'Record New Game',
+    title: "Record New Game"
   };
 
   componentDidMount(): void {
-    const { navigation: { getParam }, } = this.props;
-    const users = getParam('users')
+    const { navigation: { getParam } } = this.props;
+    const users = getParam("users");
 
   }
 

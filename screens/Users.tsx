@@ -1,11 +1,11 @@
-import React from 'react';
-import { Button, Text, View } from 'react-native';
-import Table from 'react-native-simple-table'
+import React from "react";
+import { Button, Text, View } from "react-native";
+import Table from "react-native-simple-table";
 
-import { Navigation } from '../types/navigation';
-import styles from '../styles';
-import { User } from '../types/user';
-import getUsers from '../utils/users';
+import { Navigation } from "../types/navigation";
+import styles from "../styles";
+import { User } from "../types/user";
+import getUsers from "../utils/users";
 
 interface Props {
   navigation: Navigation,
@@ -17,18 +17,18 @@ interface State {
 
 class Users extends React.Component<Props, State> {
   static navigationOptions = {
-    title: 'User List',
+    title: "User List"
   };
 
   state = {
-    users: [],
-  }
+    users: []
+  };
 
   async componentDidMount(): Promise<void> {
     let users = await getUsers();
 
     this.setState({
-      users: JSON.parse(users) as Array<User>,
+      users: JSON.parse(users) as Array<User>
     });
   }
 
@@ -36,40 +36,40 @@ class Users extends React.Component<Props, State> {
     const { navigation: { navigate } } = this.props;
     const { users } = this.state;
 
-    return navigate('User', { users });
-  }
+    return navigate("User", { users });
+  };
 
   render() {
     const { users } = this.state;
     const columns = [
       {
-        title: 'Name',
-        dataIndex: 'name',
+        title: "Name",
+        dataIndex: "name"
       },
       {
-        title: 'Played',
-        dataIndex: 'gamesPlayed'
+        title: "Played",
+        dataIndex: "gamesPlayed"
       },
       {
-        title: 'Won',
-        dataIndex: 'gamesWon'
+        title: "Won",
+        dataIndex: "gamesWon"
       },
       {
-        title: 'Win %',
-        dataIndex: 'winPercent'
+        title: "Win %",
+        dataIndex: "winPercent"
       },
       {
-        title: 'Total Points',
-        dataIndex: 'totalPoints'
+        title: "Total Points",
+        dataIndex: "totalPoints"
       },
       {
-        title: 'PPG',
-        dataIndex: 'pointsPerGame'
+        title: "PPG",
+        dataIndex: "pointsPerGame"
       },
       {
-        title: 'Rank',
-        dataIndex: 'rank'
-      },
+        title: "Rank",
+        dataIndex: "rank"
+      }
     ];
 
     return (
