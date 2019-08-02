@@ -1,10 +1,11 @@
 import React from 'react';
-import { AsyncStorage, Button, Text, View } from 'react-native';
+import { Button, Text, View } from 'react-native';
 import Table from 'react-native-simple-table'
 
 import { Navigation } from '../types/navigation';
 import styles from '../styles';
 import { User } from '../types/user';
+import getUsers from '../utils/users';
 
 interface Props {
   navigation: Navigation,
@@ -24,20 +25,12 @@ class Users extends React.Component<Props, State> {
   }
 
   async componentDidMount(): Promise<void> {
-    let users = await this.getUsers();
+    let users = await getUsers();
 
     this.setState({
       users: JSON.parse(users) as Array<User>,
     });
   }
-
-  getUsers = async () => {
-    try {
-      return await AsyncStorage.getItem('Users');
-    } finally {
-
-    }
-  };
 
   createNew = () => {
     const { navigation: { navigate } } = this.props;
@@ -83,7 +76,11 @@ class Users extends React.Component<Props, State> {
       <View style={styles.container}>
         <Text>Users</Text>
         <Button title="Create New User" color="#841584" onPress={this.createNew} />
-        <Table height={320} columnWidth={60} columns={columns} dataSource={users} />
+        {
+          users && users.length && (
+            <Table height={320} columnWidth={60} columns={columns} dataSource={users} />
+          )
+        }
       </View>
     );
   }

@@ -13,6 +13,12 @@ class Record extends React.Component<Props> {
     title: 'Record New Game',
   };
 
+  componentDidMount(): void {
+    const { navigation: { getParam }, } = this.props;
+    const users = getParam('users')
+
+  }
+
   render() {
     return (
       <View style={styles.container}>
