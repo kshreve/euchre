@@ -26,7 +26,7 @@ class Users extends React.Component<Props, State> {
 
   createNew = async () => {
     const { navigation: { navigate, getParam }, } = this.props;
-    const users = getParam('users')
+    const users = getParam('users') || [];
     const { name } = this.state;
 
     let id = 1;
