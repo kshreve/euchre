@@ -77,9 +77,9 @@ class Users extends React.Component<Props, State> {
         <Text>Users</Text>
         <Button title="Create New User" color="#841584" onPress={this.createNew} />
         {
-          users && users.length && (
+          users && users.length ? (
             <Table height={320} columnWidth={60} columns={columns} dataSource={users} />
-          )
+          ) : null
         }
       </View>
     );
