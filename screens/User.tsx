@@ -7,12 +7,12 @@ import { User } from "../types/user";
 import { createNewUser } from "../utils/userCalculator";
 
 interface Props {
-  navigation: Navigation,
-  users: User[],
+  navigation: Navigation;
+  users: User[];
 }
 
 interface State {
-  name: string,
+  name: string;
 }
 
 class Users extends React.Component<Props, State> {
@@ -25,14 +25,16 @@ class Users extends React.Component<Props, State> {
   };
 
   createNew = async () => {
-    const { navigation: { navigate, getParam } } = this.props;
+    const {
+      navigation: { navigate, getParam }
+    } = this.props;
     const users = getParam("users") || [];
     const { name } = this.state;
 
     let id = 1;
 
     if (users && users.length) {
-      users.map((user) => {
+      users.map(user => {
         if (user.id > id) {
           id = user.id + 1;
         }
@@ -51,11 +53,21 @@ class Users extends React.Component<Props, State> {
       <View style={styles.container}>
         <Text>Create New User</Text>
         <TextInput
-          style={{ height: 40, width: "100%", borderColor: "gray", borderWidth: 1 }}
-          onChangeText={(text) => this.setState({ name: text })}
+          placeholder={"Name"}
+          style={{
+            height: 40,
+            width: "100%",
+            borderColor: "gray",
+            borderWidth: 1
+          }}
+          onChangeText={text => this.setState({ name: text })}
           value={this.state.name}
         />
-        <Button title="Create New User" color="#841584" onPress={this.createNew} />
+        <Button
+          title="Create New User"
+          color="#841584"
+          onPress={this.createNew}
+        />
       </View>
     );
   }
