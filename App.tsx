@@ -12,6 +12,4 @@ const MainNavigator = createStackNavigator({
   User: { screen: User }
 });
 
-const App = createAppContainer(MainNavigator);
-
-export default App;
+export default createAppContainer(MainNavigator);
