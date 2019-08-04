@@ -4,7 +4,7 @@ import { AsyncStorage, Button, Text, TextInput, View } from "react-native";
 import { Navigation } from "../types/navigation";
 import styles from "../styles";
 import { User } from "../types/user";
-import { createNewUser } from "../utils/userCalculator";
+import { calculateUserAttributes } from "../utils/userCalculator";
 
 interface Props {
   navigation: Navigation;
@@ -12,7 +12,8 @@ interface Props {
 }
 
 interface State {
-  name: string;
+  user: User;
+  users: User[];
 }
 
 class Users extends React.Component<Props, State> {
@@ -20,17 +21,12 @@ class Users extends React.Component<Props, State> {
     title: "Create New User"
   };
 
-  state = {
-    name: null
-  };
-
-  createNew = async () => {
+  constructor(props) {
+    super(props);
     const {
-      navigation: { navigate, getParam }
-    } = this.props;
+      navigation: { getParam }
+    } = props;
     const users = getParam("users") || [];
-    const { name } = this.state;
-
     let id = 1;
 
     if (users && users.length) {
@@ -41,18 +37,37 @@ class Users extends React.Component<Props, State> {
       });
     }
 
-    const newUser = createNewUser({ id, name });
+    this.state = {
+      user: calculateUserAttributes({ id }),
+      users
+    };
+  }
 
-    await AsyncStorage.setItem("Users", JSON.stringify([...users, newUser]));
+  onChangeText = (text: string) => {
+    const { user } = this.state;
+
+    // TODO: this.setState({ ...user, name: text });
+  };
+
+  createNew = async () => {
+    const {
+      navigation: { navigate }
+    } = this.props;
+    const { user, users } = this.state;
+
+    await AsyncStorage.setItem("Users", JSON.stringify([...users, user]));
 
     return navigate("Users");
   };
 
   render() {
+    const { user } = this.state;
+
     return (
       <View style={styles.container}>
         <Text>Create New User</Text>
         <TextInput
+          key={"name"}
           placeholder={"Name"}
           style={{
             height: 40,
@@ -60,8 +75,8 @@ class Users extends React.Component<Props, State> {
             borderColor: "gray",
             borderWidth: 1
           }}
-          onChangeText={text => this.setState({ name: text })}
-          value={this.state.name}
+          onChangeText={this.onChangeText}
+          value={user.name}
         />
         <Button
           title="Create New User"
