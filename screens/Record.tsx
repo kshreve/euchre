@@ -1,11 +1,11 @@
 import React from "react";
 import { Text, View } from "react-native";
 
-import { Navigation } from "../types/navigation";
+import { NavigationPropTypes } from "../types/navigationPropTypes";
 import styles from "../styles";
 
 interface Props {
-  navigation: Navigation,
+  navigation: NavigationPropTypes;
 }
 
 class Record extends React.Component<Props> {
@@ -14,9 +14,10 @@ class Record extends React.Component<Props> {
   };
 
   componentDidMount(): void {
-    const { navigation: { getParam } } = this.props;
+    const {
+      navigation: { getParam }
+    } = this.props;
     const users = getParam("users");
-
   }
 
   render() {

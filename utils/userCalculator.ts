@@ -1,4 +1,4 @@
-import { User } from "../types/user";
+import { UserType } from "../types/userType";
 
 export const calculateUserAttributes = ({
   id,
@@ -7,7 +7,7 @@ export const calculateUserAttributes = ({
   id: number;
   name?: string;
 }) => {
-  const user = userCalculator({ id, name } as User);
+  const user = userCalculator({ id, name } as UserType);
   return user;
 };
 
@@ -18,7 +18,7 @@ const userCalculator = ({
   gamesWon = 0,
   totalPoints = 0,
   lastDatePlayed = null
-}: User): User => {
+}: UserType): UserType => {
   const winPercent = gamesPlayed ? gamesWon / gamesPlayed : 0;
   const pointsPerGame = gamesPlayed ? totalPoints / gamesPlayed : 0;
 

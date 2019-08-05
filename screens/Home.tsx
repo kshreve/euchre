@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import { Button, Text, View } from "react-native";
 
-import { Navigation } from "../types/navigation";
+import { NavigationPropTypes } from "../types/navigationPropTypes";
 import styles from "../styles";
 import Users from "./Users";
 import getUsers from "../utils/users";
-import { User } from "../types/user";
+import { UserType } from "../types/userType";
 
 interface Props {
-  navigation: Navigation,
+  navigation: NavigationPropTypes;
 }
 
 interface State {
-  users: Array<User>
+  users: Array<UserType>;
 }
 
 class Home extends Component<Props, State> {
@@ -28,7 +28,7 @@ class Home extends Component<Props, State> {
     let users = await getUsers();
 
     this.setState({
-      users: JSON.parse(users) as Array<User>
+      users: JSON.parse(users) as Array<UserType>
     });
   }
 
@@ -45,7 +45,11 @@ class Home extends Component<Props, State> {
     return (
       <View style={styles.container}>
         <Text>Dashboard</Text>
-        <Button title="Record New Game" color="#841584" onPress={this.recordNew} />
+        <Button
+          title="Record New Game"
+          color="#841584"
+          onPress={this.recordNew}
+        />
         <Users navigation={navigation} />
       </View>
     );

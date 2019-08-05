@@ -1,25 +1,34 @@
-import React from "react";
-import { AsyncStorage, Button, Text, TextInput, View } from "react-native";
+import React, { Component } from "react";
+import {
+  AsyncStorage,
+  Button,
+  NativeSyntheticEvent,
+  Text,
+  TextInput,
+  TextInputChangeEventData,
+  View
+} from "react-native";
 
-import { Navigation } from "../types/navigation";
+import { NavigationPropTypes } from "../types/navigationPropTypes";
 import styles from "../styles";
-import { User } from "../types/user";
+import { UserType } from "../types/userType";
 import { calculateUserAttributes } from "../utils/userCalculator";
 
 interface Props {
-  navigation: Navigation;
-  users: User[];
+  navigation: NavigationPropTypes;
+  users: UserType[];
 }
 
 interface State {
-  user: User;
-  users: User[];
+  user: UserType;
+  users: UserType[];
 }
 
-class Users extends React.Component<Props, State> {
+class User extends Component<Props, State> {
   static navigationOptions = {
-    title: "Create New User"
+    title: "Create New UserType"
   };
+  accessibilityLabel: any;
 
   constructor(props) {
     super(props);
@@ -43,10 +52,12 @@ class Users extends React.Component<Props, State> {
     };
   }
 
-  onChangeText = (text: string) => {
+  onChange = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
     const { user } = this.state;
+    const { value } = event.nativeEvent;
+    const inputName = this.accessibilityLabel;
 
-    // TODO: this.setState({ ...user, name: text });
+    this.setState({ [inputName]: value });
   };
 
   createNew = async () => {
@@ -55,9 +66,9 @@ class Users extends React.Component<Props, State> {
     } = this.props;
     const { user, users } = this.state;
 
-    await AsyncStorage.setItem("Users", JSON.stringify([...users, user]));
+    await AsyncStorage.setItem("User", JSON.stringify([...users, user]));
 
-    return navigate("Users");
+    return navigate("User");
   };
 
   render() {
@@ -67,7 +78,7 @@ class Users extends React.Component<Props, State> {
       <View style={styles.container}>
         <Text>Create New User</Text>
         <TextInput
-          key={"name"}
+          accessibilityLabel={"name"}
           placeholder={"Name"}
           style={{
             height: 40,
@@ -75,7 +86,7 @@ class Users extends React.Component<Props, State> {
             borderColor: "gray",
             borderWidth: 1
           }}
-          onChangeText={this.onChangeText}
+          onChange={this.onChange}
           value={user.name}
         />
         <Button
@@ -88,4 +99,4 @@ class Users extends React.Component<Props, State> {
   }
 }
 
-export default Users;
+export default User;

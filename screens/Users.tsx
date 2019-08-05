@@ -2,22 +2,22 @@ import React from "react";
 import { Button, Text, View } from "react-native";
 import Table from "react-native-simple-table";
 
-import { Navigation } from "../types/navigation";
+import { NavigationPropTypes } from "../types/navigationPropTypes";
 import styles from "../styles";
-import { User } from "../types/user";
+import { UserType } from "../types/userType";
 import getUsers from "../utils/users";
 
 interface Props {
-  navigation: Navigation,
+  navigation: NavigationPropTypes,
 }
 
 interface State {
-  users: Array<User>
+  users: Array<UserType>
 }
 
 class Users extends React.Component<Props, State> {
   static navigationOptions = {
-    title: "User List"
+    title: "UserType List"
   };
 
   state = {
@@ -28,7 +28,7 @@ class Users extends React.Component<Props, State> {
     let users = await getUsers();
 
     this.setState({
-      users: JSON.parse(users) as Array<User>
+      users: JSON.parse(users) as Array<UserType>
     });
   }
 
@@ -36,7 +36,7 @@ class Users extends React.Component<Props, State> {
     const { navigation: { navigate } } = this.props;
     const { users } = this.state;
 
-    return navigate("User", { users });
+    return navigate("UserType", { users });
   };
 
   render() {

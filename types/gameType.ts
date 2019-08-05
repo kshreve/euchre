@@ -1,4 +1,4 @@
-export interface Game {
+export interface GameType {
   team1AId: number,
   team1BId: number,
   team2AId: number,
