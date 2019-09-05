@@ -8,11 +8,11 @@ import { UserType } from "../types/userType";
 import getUsers from "../utils/users";
 
 interface Props {
-  navigation: NavigationPropTypes,
+  navigation: NavigationPropTypes;
 }
 
 interface State {
-  users: Array<UserType>
+  users: Array<UserType>;
 }
 
 class Users extends React.Component<Props, State> {
@@ -33,10 +33,12 @@ class Users extends React.Component<Props, State> {
   }
 
   createNew = () => {
-    const { navigation: { navigate } } = this.props;
+    const {
+      navigation: { navigate }
+    } = this.props;
     const { users } = this.state;
 
-    return navigate("UserType", { users });
+    return navigate("User", { users });
   };
 
   render() {
@@ -75,12 +77,19 @@ class Users extends React.Component<Props, State> {
     return (
       <View style={styles.container}>
         <Text>Users</Text>
-        <Button title="Create New User" color="#841584" onPress={this.createNew} />
-        {
-          users && users.length ? (
-            <Table height={320} columnWidth={60} columns={columns} dataSource={users} />
-          ) : null
-        }
+        <Button
+          title="Create New User"
+          color="#841584"
+          onPress={this.createNew}
+        />
+        {users && users.length ? (
+          <Table
+            height={320}
+            columnWidth={60}
+            columns={columns}
+            dataSource={users}
+          />
+        ) : null}
       </View>
     );
   }
