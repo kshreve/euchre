@@ -1,4 +1,5 @@
-import { createAppContainer, createStackNavigator } from "react-navigation";
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
 
 import Home from "./screens/Home";
 import Record from "./screens/Record";
