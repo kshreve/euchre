@@ -17,7 +17,7 @@ interface State {
 
 class Users extends React.Component<Props, State> {
   static navigationOptions = {
-    title: "UserType List"
+    title: "User List"
   };
 
   state = {
