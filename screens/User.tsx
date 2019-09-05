@@ -26,12 +26,13 @@ interface State {
 
 class User extends Component<Props, State> {
   static navigationOptions = {
-    title: "Create New UserType"
+    title: "Create New User"
   };
   accessibilityLabel: any;
 
   constructor(props) {
     super(props);
+
     const {
       navigation: { getParam }
     } = props;
@@ -66,9 +67,9 @@ class User extends Component<Props, State> {
     } = this.props;
     const { user, users } = this.state;
 
-    await AsyncStorage.setItem("User", JSON.stringify([...users, user]));
+    await AsyncStorage.setItem("Users", JSON.stringify([...users, user]));
 
-    return navigate("User");
+    return navigate("Users");
   };
 
   render() {
